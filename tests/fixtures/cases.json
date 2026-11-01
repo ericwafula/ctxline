@@ -1,0 +1,166 @@
+[
+  {
+    "name": "full session",
+    "now": 1800000000,
+    "branch": "main",
+    "payload": {
+      "model": {
+        "display_name": "Opus 5.5"
+      },
+      "workspace": {
+        "current_dir": "/Users/me/stovetime"
+      },
+      "context_window": {
+        "total_input_tokens": 180500,
+        "total_output_tokens": 5500,
+        "context_window_size": 1000000,
+        "used_percentage": 18.6
+      },
+      "rate_limits": {
+        "five_hour": {
+          "used_percentage": 8.4,
+          "resets_at": 1800010800
+        },
+        "seven_day": {
+          "used_percentage": 28,
+          "resets_at": 1800172800
+        }
+      },
+      "cost": {
+        "total_cost_usd": 8.2961
+      }
+    },
+    "expected": "Opus 5.5 · stovetime ⑂ main · ctx 186k (19%) · 5h 8%(3h) · wk 28%(2d) · $8.30"
+  },
+  {
+    "name": "before the first response",
+    "now": 1800000000,
+    "branch": null,
+    "payload": {
+      "model": {
+        "display_name": "Sonnet 5.5"
+      },
+      "cwd": "/tmp/scratch",
+      "context_window": {
+        "total_input_tokens": 0,
+        "total_output_tokens": 0,
+        "context_window_size": 200000,
+        "used_percentage": null
+      },
+      "cost": {
+        "total_cost_usd": 0
+      }
+    },
+    "expected": "Sonnet 5.5 · scratch · $0.00"
+  },
+  {
+    "name": "percentage missing, worked out from the window size",
+    "now": 1800000000,
+    "branch": null,
+    "payload": {
+      "workspace": {
+        "current_dir": "/srv/api"
+      },
+      "context_window": {
+        "total_input_tokens": 150000,
+        "context_window_size": 200000
+      }
+    },
+    "expected": "api · ctx 150k (75%)"
+  },
+  {
+    "name": "over a million tokens, resets soon, big spend",
+    "now": 1800000000,
+    "branch": "feature/login",
+    "payload": {
+      "model": {
+        "display_name": "Opus 5.5"
+      },
+      "workspace": {
+        "current_dir": "/code/app"
+      },
+      "context_window": {
+        "total_input_tokens": 1204000,
+        "total_output_tokens": 1000,
+        "used_percentage": 60.25
+      },
+      "rate_limits": {
+        "five_hour": {
+          "used_percentage": 97.5,
+          "resets_at": 1800000030
+        },
+        "seven_day": {
+          "used_percentage": 50
+        }
+      },
+      "cost": {
+        "total_cost_usd": 1234.5
+      }
+    },
+    "expected": "Opus 5.5 · app ⑂ feature/login · ctx 1.21M (60%) · 5h 98%(now) · wk 50% · $1,234.50"
+  },
+  {
+    "name": "the 5-hour window has reset, so it shows 0%",
+    "now": 1800000000,
+    "branch": null,
+    "payload": {
+      "rate_limits": {
+        "seven_day": {
+          "used_percentage": 12.5,
+          "resets_at": 1800002700
+        }
+      }
+    },
+    "expected": "5h 0% · wk 13%(45m)"
+  },
+  {
+    "name": "a window past its reset time counts as 0%",
+    "now": 1800000000,
+    "branch": null,
+    "payload": {
+      "rate_limits": {
+        "five_hour": {
+          "used_percentage": 91,
+          "resets_at": 1799999000
+        },
+        "seven_day": {
+          "used_percentage": 40,
+          "resets_at": 1800090000
+        }
+      }
+    },
+    "expected": "5h 0% · wk 40%(1d)"
+  },
+  {
+    "name": "every window has reset, so both show 0%",
+    "now": 1800000000,
+    "branch": null,
+    "payload": {
+      "rate_limits": {
+        "five_hour": {
+          "used_percentage": 91,
+          "resets_at": 1799999000
+        }
+      }
+    },
+    "expected": "5h 0% · wk 0%"
+  },
+  {
+    "name": "nothing usable",
+    "now": 1800000000,
+    "branch": null,
+    "payload": {
+      "model": null,
+      "context_window": "broken",
+      "rate_limits": {
+        "five_hour": {
+          "used_percentage": "high"
+        }
+      },
+      "cost": {
+        "total_cost_usd": true
+      }
+    },
+    "expected": ""
+  }
+]
