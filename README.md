@@ -24,7 +24,7 @@ It uses no tokens. Claude Code runs it on your machine and sends it the session 
 With Homebrew:
 
 ```bash
-brew install ericwafula/tap/ctxline
+brew install ericwafula/tools/ctxline
 ctxline install
 ```
 
