@@ -80,3 +80,13 @@ python3 -m unittest discover -s tests
 ```bash
 npm test
 ```
+
+## Releasing
+
+Run the Publish workflow from GitHub (Actions → Publish → Run workflow), or from the terminal:
+
+```bash
+gh workflow run publish.yml -f bump=patch
+```
+
+Choose `patch`, `minor` or `major`. The workflow runs the tests, bumps the version in `src/ctxline/__init__.py` and `package.json`, commits to `main`, tags the release, publishes to PyPI and npm, and updates the Homebrew formula. Pull afterwards to get the version commit.
