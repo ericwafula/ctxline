@@ -1,6 +1,6 @@
 {
   "name": "ctxline",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A Claude Code status line for context and usage limits",
   "license": "MIT",
   "author": "Eric Wafula",
