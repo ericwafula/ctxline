@@ -21,17 +21,24 @@ It uses no tokens. Claude Code runs it on your machine and sends it the session 
 
 ## Install
 
+With uv:
+
+```bash
+uv tool install ctxline
+ctxline install
+```
+
+With pipx:
+
+```bash
+pipx install ctxline
+ctxline install
+```
+
 With Homebrew:
 
 ```bash
 brew install ericwafula/tools/ctxline
-ctxline install
-```
-
-With uv:
-
-```bash
-uv tool install git+https://github.com/ericwafula/ctxline
 ctxline install
 ```
 
@@ -52,7 +59,7 @@ The Node version records the path of the Node it was installed with. If you remo
 ctxline uninstall
 ```
 
-This puts back the status line you had before, or removes the entry if there wasn't one. Then uninstall the package with `brew uninstall ctxline`, `uv tool uninstall ctxline` or `npm uninstall -g ctxline`.
+This puts back the status line you had before, or removes the entry if there wasn't one. Then uninstall the package with `uv tool uninstall ctxline`, `pipx uninstall ctxline`, `brew uninstall ctxline` or `npm uninstall -g ctxline`.
 
 ## Try it without Claude Code
 
