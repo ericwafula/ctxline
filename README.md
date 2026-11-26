@@ -45,7 +45,7 @@ ctxline install
 With Node 18 or newer:
 
 ```bash
-npm install -g github:ericwafula/ctxline
+npm install -g ctxline
 ctxline install
 ```
 
